@@ -1,5 +1,6 @@
 package com.example.simple.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.example.simple.entity.User;
 import com.example.simple.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class UserController {
     public String selectUser (@PathVariable int id){
         User user = userService.selectUser(id);
 
-        return userService.selectUser(id).toString();
+        return JSON.toJSONString(user);
 
     }
 }

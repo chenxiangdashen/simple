@@ -1,5 +1,7 @@
 package com.example.simple.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class User {
     private Integer id;
     private String name;
@@ -7,6 +9,7 @@ public class User {
     private String password;
     private String mark;
 
+    @JSONField(name="password")
     public String getPassword() {
         return password;
     }
@@ -23,6 +26,7 @@ public class User {
         this.id = id;
     }
 
+    @JSONField(name="name")
     public String getName() {
         return name;
     }
@@ -31,6 +35,7 @@ public class User {
         this.name = name;
     }
 
+    @JSONField(name="age")
     public Integer getAge() {
         return age;
     }
