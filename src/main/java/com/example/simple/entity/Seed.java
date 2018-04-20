@@ -1,6 +1,9 @@
 package com.example.simple.entity;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -15,9 +18,18 @@ import java.util.Date;
  * "1662MB"
  * title
  * :
- * "212121@草榴社區@Kin8tengoku-893 金髪天国 日本男兒小尺寸已經滿足不了美女 超可愛金髮女傭美女羅莎莉"
+ * "212121@草榴社區@Kin8tengoku-893"
  */
+
+@Entity //实体类的注解
 public class Seed {
+
+    @Id //@id注意选择这个javax.persistence
+    @GeneratedValue
+    private int id;
+
+
+
     private Date day;
 
     private int hits;
@@ -54,6 +66,14 @@ public class Seed {
 
     public void setDay(Date day) {
         this.day = day;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     private String title;

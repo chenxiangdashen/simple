@@ -1,4 +1,11 @@
-spring.datasource.url: jdbc:mysql://localhost:3306/simple?useUnicode=true&characterEncoding=utf8
-spring.datasource.username: root
-spring.datasource.password: 123456
-spring.datasource.driver-class-name: com.mysql.jdbc.Driver
+spring:
+    datasource:
+        driver-class-name:  com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.97.214.219:3306/simple?useUnicode=true&characterEncoding=utf8
+        username: cx
+        password: 1
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+            show-sql: true
