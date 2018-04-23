@@ -3,6 +3,7 @@ package com.example.simple.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.simple.entity.Seed;
+import com.example.simple.mapper.SeedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,12 @@ public class QueryService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private SeedRepository seedRepository;
+
+
+
+
     public String queryHttp(String url){
         try{
             String json = restTemplate.getForObject(url, String.class);
@@ -34,23 +41,21 @@ public class QueryService {
 
             Object data = object.get("data");
 
-            Map<String,String> stringStringMap = (Map<String,String>)JSON.parse(data+"");
+            Map<String,JSONObject> stringStringMap = (Map<String,JSONObject>)JSON.parse(data+"");
 
 
             List<Seed> list = new ArrayList<>();
 
             for (String s : stringStringMap.keySet()) {
-                System.out.println(s + "==>" +stringStringMap.get(s));
-
+                Seed seed = JSON.parseObject(stringStringMap.get(s)+"",Seed.class);
+                seedRepository.save(seed);
+                list.add(seed);
             }
 
-
-
             String result = new String(json.getBytes("UTF-8"), "UTF-8");
-
-            System.out.println(result);
             return json;
         }catch (Exception e){
+            System.out.println(e.toString());
 
         }
         //get json数据
