@@ -3,6 +3,7 @@ package com.example.simple.service;
 import com.example.simple.utils.QueryUrl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,12 @@ public class DoubanMoiveService {
             System.out.println("没有结果");
         }else {
 
+            for (int i =0;i< rows.size();i++){
+                Element row = rows.get(i);
+                System.out.println(row.attr("data-title"));
+            }
 
-            System.out.println("--------------------------- 查询结果 ---------------------------");
+
 
         }
         return json;
