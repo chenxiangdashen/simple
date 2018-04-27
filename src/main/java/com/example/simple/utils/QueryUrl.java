@@ -1,10 +1,8 @@
-package com.example.simple.service;
+package com.example.simple.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.simple.entity.Seed;
-import com.example.simple.mapper.SeedRepository;
-import com.example.simple.utils.QueryUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,43 +10,15 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-
 @Configuration
-public class QueryService {
+public class QueryUrl {
 
     @Autowired
-    private SeedRepository seedRepository;
+    private RestTemplate restTemplate;
 
-    @Autowired
-    private QueryUrl queryUrl;
-
-
-    public String queryHttp(String url){
+    public String queryUrl(String url){
         try{
-            String json = queryUrl.queryUrl(url);
-
-            json=json.substring(json.indexOf('(')+1,json.lastIndexOf(')'));
-
-            JSONObject object = JSONObject.parseObject(json);
-
-            Object data = object.get("data");
-
-            Map<String,JSONObject> stringStringMap = (Map<String,JSONObject>)JSON.parse(data+"");
-
-
-            List<Seed> list = new ArrayList<>();
-
-            for (String s : stringStringMap.keySet()) {
-                Seed seed = JSON.parseObject(stringStringMap.get(s)+"",Seed.class);
-                seedRepository.save(seed);
-                list.add(seed);
-            }
-
-            String result = new String(json.getBytes("UTF-8"), "UTF-8");
+            String json = restTemplate.getForObject(url, String.class);
             return json;
         }catch (Exception e){
             System.out.println(e.toString());
@@ -56,7 +26,6 @@ public class QueryService {
         }
         //get json数据
         return "";
-
     }
 
     @Bean
