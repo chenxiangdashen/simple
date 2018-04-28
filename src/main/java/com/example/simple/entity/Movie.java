@@ -3,8 +3,10 @@ package com.example.simple.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "movie")
 public class Movie {
 
     @Id //@id注意选择这个javax.persistence

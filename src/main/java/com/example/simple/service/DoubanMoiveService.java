@@ -1,5 +1,7 @@
 package com.example.simple.service;
 
+import com.example.simple.entity.Movie;
+import com.example.simple.mapper.MoiveRepository;
 import com.example.simple.utils.QueryUrl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +19,9 @@ public class DoubanMoiveService {
     @Autowired
     private QueryUrl queryUrl;
 
+    @Autowired
+    private MoiveRepository moiveRepository;
+
     public String queryHotMoive(String url){
         String json = queryUrl.queryUrl(url);
 //        json = json.replaceAll("\n", "");
@@ -30,8 +35,17 @@ public class DoubanMoiveService {
         }else {
 
             for (int i =0;i< rows.size();i++){
+                Movie movie= new Movie();
                 Element row = rows.get(i);
-                System.out.println(row.attr("data-title"));
+                movie.setTitle(row.attr("data-title"));
+                movie.setActors(row.attr("data-actors"));
+                movie.setDirector(row.attr("data-director"));
+                movie.setDuration(row.attr("data-duration"));
+                movie.setRelease(row.attr("data-release"));
+                movie.setScore(Integer.parseInt(row.attr("data-score")));
+                movie.setStar(Integer.parseInt(row.attr("data-star")));
+                moiveRepository.save(movie);
+                System.out.println(movie);
             }
 
 

@@ -14,14 +14,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @SpringBootApplication
 @Component
-public class SimpleApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
+public class SimpleApplication extends WebMvcConfigurerAdapter{
 
-    public static void main(String[] args) {
-
-        SpringApplication.run(SimpleApplication.class, args);
-
-
-    }
+    public static void main(String[] args) { SpringApplication.run(SimpleApplication.class, args);}
 
 
     @Override
@@ -30,8 +25,4 @@ public class SimpleApplication extends WebMvcConfigurerAdapter implements Comman
         registry.addInterceptor(new WebAppConfig());
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("项目启动了1111");
-    }
 }
