@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 public interface SeedRepository extends JpaRepository<Seed, Long> {
 //    public abstract Seed findByName(String name);
 //    public abstract Seed findByNameAndAge(String name, Integer age);
-//    @Query("from User u where u.name=:name")
-//    public abstract Seed findUser(@Param("name") String name);
+    @Query("from Seed s where s.moiveID=:moiveID")
+    public abstract List<Seed> findbyMoiveID(@Param("moiveID") String moiveID);
+
     public Seed findAllBy();
 }

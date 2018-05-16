@@ -8,21 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DoubanMovieController {
-
+public class SeedController {
 
     @Autowired
-    private DoubanMoiveService doubanMoiveService;
+    private QueryService queryService;
 
-    @RequestMapping("/queryHotMove")
-    public String query (){
-        return doubanMoiveService.saveNewHotMoive("https://movie.douban.com/cinema/nowplaying/shanghai/");
+    @RequestMapping("/query")
+    public void query (){
+         queryService.queryHttp();
     }
-
-    @RequestMapping("/queryAllHot")
-    public String queryAll (){
-        return doubanMoiveService.queryAllMoive();
-    }
-
 
 }

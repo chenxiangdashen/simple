@@ -2,7 +2,9 @@ package com.example.simple.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.simple.entity.Movie;
 import com.example.simple.entity.Seed;
+import com.example.simple.mapper.MoiveRepository;
 import com.example.simple.mapper.SeedRepository;
 import com.example.simple.utils.QueryUrl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,48 +29,33 @@ public class QueryService {
     private QueryUrl queryUrl;
 
 
-    public String queryHttp(String url){
-        try{
-            String json = queryUrl.queryUrl(url);
+    @Autowired
+    private MoiveRepository moiveRepository;
 
-            json=json.substring(json.indexOf('(')+1,json.lastIndexOf(')'));
+    public void queryHttp(){
+        List<Movie> movieList = moiveRepository.findAll();
 
-            JSONObject object = JSONObject.parseObject(json);
+        for (int i = 0 ; i<movieList.size(); i ++ ){
+            String url = "http://api.xhub.cn/api.php?op=search_list&callback=jQuery19106557464973455058_1524145409076&key="+movieList.get(i).getTitle()+"&page=1&code=9d7196f4e8cb8dce1915624467f2f89b&_=1524145409077";
+            try{
+                String json = queryUrl.queryUrl(url);
+                System.out.println(json);
+                json=json.substring(json.indexOf('(')+1,json.lastIndexOf(')'));
+                JSONObject object = JSONObject.parseObject(json);
+                Object data = object.get("data");
+                Map<String,JSONObject> stringStringMap = (Map<String,JSONObject>)JSON.parse(data+"");
+                List<Seed> list = new ArrayList<>();
+                for (String s : stringStringMap.keySet()) {
+                    Seed seed = JSON.parseObject(stringStringMap.get(s)+"",Seed.class);
+                    seedRepository.save(seed);
+                    list.add(seed);
+                }
 
-            Object data = object.get("data");
+            }catch (Exception e){
+                System.out.println(e.toString());
 
-            Map<String,JSONObject> stringStringMap = (Map<String,JSONObject>)JSON.parse(data+"");
-
-
-            List<Seed> list = new ArrayList<>();
-
-            for (String s : stringStringMap.keySet()) {
-                Seed seed = JSON.parseObject(stringStringMap.get(s)+"",Seed.class);
-                seedRepository.save(seed);
-                list.add(seed);
             }
-
-            String result = new String(json.getBytes("UTF-8"), "UTF-8");
-            return json;
-        }catch (Exception e){
-            System.out.println(e.toString());
-
         }
-        //get json数据
-        return "";
 
-    }
-
-    @Bean
-    public RestTemplate restTemplate(ClientHttpRequestFactory factory){
-        return new RestTemplate(factory);
-    }
-
-    @Bean
-    public ClientHttpRequestFactory simpleClientHttpRequestFactory(){
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setReadTimeout(5000);//单位为ms
-        factory.setConnectTimeout(5000);//单位为ms
-        return factory;
     }
 }

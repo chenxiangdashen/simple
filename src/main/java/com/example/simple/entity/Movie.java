@@ -1,30 +1,28 @@
 package com.example.simple.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
 public class Movie {
 
     @Id //@id注意选择这个javax.persistence
-    @GeneratedValue
-    private int id;//id
     private String movieID;
     private String title;//电影名字
     private String duration;//时长
     private int star;//获得星星
-    private int score;//评分
+    private String score;//评分
+    private String imageSrc;//图片地址
+    private int votecount; //评价数量
+    private String region; //出品国家
+    private String director;//导演
+    private String actors;//主演
+    private String releaseTime;//上映时间
+    private String subject;//上映时间
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
 
     public String getMovieID() {
@@ -55,15 +53,23 @@ public class Movie {
         return star;
     }
 
+    public int getVotecount() {
+        return votecount;
+    }
+
+    public void setVotecount(int votecount) {
+        this.votecount = votecount;
+    }
+
     public void setStar(int star) {
         this.star = star;
     }
 
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
@@ -79,19 +85,40 @@ public class Movie {
         return actors;
     }
 
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
     public void setActors(String actors) {
         this.actors = actors;
     }
 
-    public String getRelease() {
-        return release;
+    public String getReleaseTime() {
+        return releaseTime;
     }
 
-    public void setRelease(String release) {
-        this.release = release;
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
     }
 
-    private String director;//导演
-    private String actors;//主演
-    private String release;//上映时间
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 }

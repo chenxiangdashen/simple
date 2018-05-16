@@ -7,18 +7,6 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * day
- * :
- * "2014-04-04"
- * hits
- * :
- * "199"
- * size
- * :
- * "1662MB"
- * title
- * :
- * "212121@草榴社區@Kin8tengoku-893"
  */
 
 @Entity //实体类的注解
@@ -28,13 +16,43 @@ public class Seed {
     @GeneratedValue
     private int id;
 
-
-
-    private Date day;
+    private String day;
 
     private int hits;
 
+    private String moiveID;
+
     private String size;
+
+    private String title;
+
+    private String url;
+
+    private Date createDate;
+
+    public String getMoiveID() {
+        return moiveID;
+    }
+
+    public void setMoiveID(String moiveID) {
+        this.moiveID = moiveID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public int getHits() {
         return hits;
@@ -60,11 +78,11 @@ public class Seed {
         this.title = title;
     }
 
-    public Date getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
@@ -76,6 +94,6 @@ public class Seed {
         this.id = id;
     }
 
-    private String title;
+
 
 }
