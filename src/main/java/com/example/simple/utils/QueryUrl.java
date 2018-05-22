@@ -11,7 +11,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class QueryUrl {
@@ -24,6 +27,10 @@ public class QueryUrl {
             HttpHeaders headers = new HttpHeaders();
 
 
+            MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+            headers.setContentType(type);
+            headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+
             headers.set("Accept-Charset", "utf-8");
             headers.set("scheme", "https");
             headers.set("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
@@ -31,8 +38,6 @@ public class QueryUrl {
             headers.set("cookie", "__cfduid=d70e5a3ffdf75871fff427485eefc200b1525112654; Hm_lvt_ea676c077d1fc50763a16160807c8822=1525112653,1526227096,1526314239; Hm_lpvt_ea676c077d1fc50763a16160807c8822=1526314239");
             headers.set("authority", "m.zhongziso.com");
             headers.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
-
-            headers.add("Accept", MediaType.APPLICATION_JSON.toString());
             JSONObject jsonObj =  new JSONObject();
             HttpEntity<String> formEntity = new HttpEntity<String>(jsonObj.toString(), headers);
 //            String result = restTemplate.postForObject(url, formEntity, String.class);
@@ -46,10 +51,12 @@ public class QueryUrl {
         //get json数据
         return "";
     }
-
     @Bean
-    public RestTemplate restTemplate(ClientHttpRequestFactory factory){
-        return new RestTemplate(factory);
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+        return restTemplate;
     }
 
     @Bean

@@ -16,7 +16,7 @@ public class DoubanMovieController {
 
     @RequestMapping("/queryHotMove")
     public String query (){
-        return doubanMoiveService.saveNewHotMoive("https://movie.douban.com/cinema/nowplaying/shanghai/");
+        return doubanMoiveService.queryHotMovie();
     }
 
     @RequestMapping("/queryAllHot")
