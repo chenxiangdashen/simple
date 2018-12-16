@@ -1,27 +1,42 @@
 package com.example.simple.controller;
 
+import com.example.simple.core.ret.RetResponse;
+import com.example.simple.core.ret.RetResult;
+import com.example.simple.entity.Movie;
 import com.example.simple.service.DoubanMoiveService;
-import com.example.simple.service.QueryService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
+@Api(tags = {"豆瓣电影操作接口"}, description = "DoubanMovieController")
 public class DoubanMovieController {
 
 
-    @Autowired
+    @Resource
     private DoubanMoiveService doubanMoiveService;
 
-    @RequestMapping("/queryHotMove")
-    public String query (){
-        return doubanMoiveService.queryHotMovie();
+    @ApiOperation(value = "查询热门电影", notes = "查询所有热门电影")
+    @RequestMapping(value = "/queryHotMove",method=RequestMethod.GET)
+    public RetResult<Object> query (){
+        List<Movie> list = doubanMoiveService.queryHotMovie();
+        return RetResponse.makeOKRsp(list);
     }
 
-    @RequestMapping("/queryAllHot")
+    @RequestMapping(value = "/queryAllHot",method=RequestMethod.GET)
     public String queryAll (){
         return doubanMoiveService.queryAllMoive();
+    }
+
+
+    public void saveNewHotMoive(){
+        doubanMoiveService.saveNewHotMoive("https://movie.douban.com/cinema/nowplaying/shanghai/");
     }
 
 

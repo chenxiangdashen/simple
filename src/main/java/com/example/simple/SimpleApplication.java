@@ -1,73 +1,112 @@
 package com.example.simple;
 
+import com.example.simple.controller.DanmuController;
 import com.example.simple.controller.DoubanMovieController;
+import com.example.simple.service.DanmuService;
+import com.yycdev.douyu.sdk.DouYuClient;
+import com.yycdev.douyu.sdk.MessageListener;
+import com.yycdev.douyu.sdk.entity.ChatMsg;
+import com.yycdev.douyu.sdk.entity.DgbMsg;
 import org.mybatis.spring.annotation.MapperScan;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @MapperScan("com.example.simple.mapper")
 @Configuration
 @SpringBootApplication
 @Component
+@SpringBootConfiguration
 @EnableScheduling
-public class SimpleApplication extends WebMvcConfigurerAdapter implements ApplicationRunner {
+public class SimpleApplication extends SpringBootServletInitializer implements ApplicationRunner {
+
 
 //
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(SimpleApplication.class);
-//    }
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SimpleApplication.class);
+    }
 //
 //    public static void main(String[] args) {
 //        SpringApplication.run(SimpleApplication.class, args);
 //    }
 
-    public static void main(String[] args) { SpringApplication.run(SimpleApplication.class, args);}
-
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        //注册自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(new WebAppConfig());
+    public static void main(String[] args) {
+        SpringApplication.run(SimpleApplication.class, args);
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        //注册自定义拦截器，添加拦截路径和排除拦截路径
+//        registry.addInterceptor(new WebAppConfig());
+//    }
+////
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//
+//        registry.addMapping("/**")
+//                .allowCredentials(true)
+//                .allowedHeaders("*")
+//                .allowedOrigins("*")
+//                .allowedMethods("*");
+//
+//    }
 
-        registry.addMapping("/**")
-                .allowCredentials(true)
-                .allowedHeaders("*")
-                .allowedOrigins("*")
-                .allowedMethods("*");
+    private CorsConfiguration buildConfig() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.addAllowedMethod("*");
+        return corsConfiguration;
+    }
 
+    /**
+     * 跨域过滤器
+     *
+     * @return
+     */
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig()); // 4
+        return new CorsFilter(source);
     }
 
     @Autowired
     DoubanMovieController doubanMovieController;
+
+    @Autowired
+    DanmuController danmuController;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         // 参数：1、任务体 2、首次执行的延时时间
         //      3、任务执行间隔 4、间隔时间单位
+
+        danmuController.saveDanmu();
+
 //        service.scheduleAtFixedRate(()->{
 //            System.out.println("task ScheduledExecutorService "+new Date());
-//            doubanMovieController.query();
+//            doubanMovieController.saveNewHotMoive();
 //        }, 0, 3, TimeUnit.DAYS);
 
 

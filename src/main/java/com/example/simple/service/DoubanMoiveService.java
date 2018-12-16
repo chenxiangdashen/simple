@@ -63,6 +63,7 @@ public class DoubanMoiveService {
                 movie.setImageSrc(row.select("img").attr("src"));
                 list.add(movie);
                 moiveRepository.save(movie);
+                System.out.println(row.attr("data-title"));
                 queryItemByA(movie.getTitle(), movie.getMovieID());
 
 //                queryItemByB(movie.getTitle(), movie.getMovieID());
@@ -110,14 +111,15 @@ public class DoubanMoiveService {
      * 查询所有热门电影
      * @return
      */
-    public String queryHotMovie(){
-        return JSON.toJSONString(moiveRepository.findAll(SortTools.basicSort(new SortDto("desc", "votecount"))));
+    public List<Movie> queryHotMovie(){
+        return moiveRepository.findAll(SortTools.basicSort(new SortDto("desc", "votecount")));
     }
 
 
     private void queryItemByA(String name, String moiveID) {
 //        String url= "https://btcat.org/search/"+name+"/default-1.html";
-        String url = "https://m.zhongziso.com/list/" + name + "/1";
+
+        String url = "https://www.zhongzisoba.com/list/" + name + "/1";
         String json = queryUrl.queryUrl(url);
         Document doc = Jsoup.parse(json);
         List<Seed> list = new ArrayList<>();

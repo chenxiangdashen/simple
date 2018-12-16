@@ -4,6 +4,40 @@ spring:
         url: jdbc:mysql://47.97.214.219:3306/simple?useUnicode=true&characterEncoding=utf8
         username: cx
         password: 1
+        type: com.alibaba.druid.pool.DruidDataSource
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,log4j
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        useGlobalDataSourceStat: true
+#   #模板引擎
+#    freemarker:
+#        #关闭缓存
+#        cache: false
+#        request-context-attribute: request
+#        #模板加载的位置
+#        template-loader-path: classpath:/templates
+#        #前缀
+#        suffix: .htm
+#        #后缀
+#        prefix: /htm/
+#
+#     mybatis:
+#        #实体类所做包
+#        type-aliases-package: learning.model
+#        #mapper.xml所在位置
+#        mapper-locations: classpath:mappers/*.xml
+
 
     jpa:
         hibernate:
@@ -12,6 +46,11 @@ spring:
 
 
 
-
+##配置分页插件pagehelper
+#pagehelper:
+#    helperDialect: mysql
+#    reasonable: true
+#    supportMethodsArguments: true
+#    params: count=countSql
 
 
