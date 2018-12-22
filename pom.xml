@@ -107,11 +107,11 @@
             <version>1.1.3</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.yycdev</groupId>
-            <artifactId>douyu-sdk</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.yycdev</groupId>-->
+            <!--<artifactId>douyu-sdk</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

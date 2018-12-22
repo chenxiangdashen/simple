@@ -3,10 +3,10 @@ package com.example.simple.service;
 
 import com.example.simple.entity.Danmu;
 import com.example.simple.mapper.DanmuRepository;
+import com.example.simple.sdk.DouYuClient;
+import com.example.simple.sdk.MessageListener;
+import com.example.simple.sdk.entity.ChatMsg;
 import com.example.simple.utils.Dto2Entity;
-import com.yycdev.douyu.sdk.DouYuClient;
-import com.yycdev.douyu.sdk.MessageListener;
-import com.yycdev.douyu.sdk.entity.ChatMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +42,6 @@ public class DanmuService {
 
         client.login();
         client.sync();
-        client.exit();
+//        client.exit();
     }
 }

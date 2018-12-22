@@ -2,15 +2,8 @@ package com.example.simple;
 
 import com.example.simple.controller.DanmuController;
 import com.example.simple.controller.DoubanMovieController;
-import com.example.simple.service.DanmuService;
-import com.yycdev.douyu.sdk.DouYuClient;
-import com.yycdev.douyu.sdk.MessageListener;
-import com.yycdev.douyu.sdk.entity.ChatMsg;
-import com.yycdev.douyu.sdk.entity.DgbMsg;
 import org.mybatis.spring.annotation.MapperScan;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
