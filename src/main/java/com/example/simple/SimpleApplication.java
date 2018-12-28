@@ -4,6 +4,8 @@ import com.example.simple.controller.DanmuController;
 import com.example.simple.controller.DoubanMovieController;
 import org.mybatis.spring.annotation.MapperScan;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,12 +16,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -31,8 +36,8 @@ import java.util.concurrent.ScheduledExecutorService;
 @EnableScheduling
 public class SimpleApplication extends SpringBootServletInitializer implements ApplicationRunner {
 
-
-//
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleApplication.class);
+    //
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SimpleApplication.class);
@@ -42,8 +47,22 @@ public class SimpleApplication extends SpringBootServletInitializer implements A
 //        SpringApplication.run(SimpleApplication.class, args);
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException {
         SpringApplication.run(SimpleApplication.class, args);
+
+
+//        SpringApplication app = new SpringApplication(SimpleApplication.class);
+//        Environment env = app.run(args).getEnvironment();
+//        LOGGER.info("\n----------------------------------------------------------\n\t" +
+//                        "Application '{}' is running! Access URLs:\n\t" +
+//                        "Local: \t\thttp://localhost:{}\n\t" +
+//                        "External: \thttp://{}:{}\n\t" +
+//                        "Profile(s): \t{}\n----------------------------------------------------------",
+//                env.getProperty("spring.application.name"),
+//                env.getProperty("server.port"),
+//                InetAddress.getLocalHost().getHostAddress(),
+//                env.getProperty("server.port"),
+//                env.getActiveProfiles());
     }
 
 //    @Override

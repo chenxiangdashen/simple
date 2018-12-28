@@ -1,26 +1,25 @@
 package com.example.simple.entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "danmu")
 public class Danmu{
 
-
-    @Id //@id注意选择这个javax.persistence
     @GeneratedValue
     private int id;
 
     private Date time;
+    @Id //@id注意选择这个javax.persistence
     private String uuid;
     private String cid;
     private String gid;
     private String rid;
     private String uid;
+
+    @Column(name = "nn")
     private String nn;
+
     private String txt;
     private String level;
     private String gt;

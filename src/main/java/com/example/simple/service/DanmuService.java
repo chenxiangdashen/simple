@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
+import java.util.List;
 
 @Configuration
 public class DanmuService {
@@ -20,6 +21,10 @@ public class DanmuService {
 
     @Autowired
     private DanmuRepository danmuRepository;
+
+    public List<Danmu> queryHotMovie(){
+        return danmuRepository.findAll();
+    }
 
 
     public void saveDanmu() {
