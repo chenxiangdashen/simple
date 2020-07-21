@@ -1,5 +1,6 @@
 package com.example.simple.controller;
 
+import com.example.simple.core.aop.AnnotationLog;
 import com.example.simple.core.ret.RetResponse;
 import com.example.simple.core.ret.RetResult;
 import com.example.simple.entity.Movie;
@@ -24,6 +25,7 @@ public class DoubanMovieController {
 
     @ApiOperation(value = "查询热门电影", notes = "查询所有热门电影")
     @RequestMapping(value = "/queryHotMove",method=RequestMethod.GET)
+    @AnnotationLog(remark = "查询")
     public RetResult<Object> query (){
         List<Movie> list = doubanMoiveService.queryHotMovie();
         return RetResponse.makeOKRsp(list);

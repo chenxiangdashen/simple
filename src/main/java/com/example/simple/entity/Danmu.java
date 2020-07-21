@@ -6,12 +6,12 @@ import java.util.Date;
 @Table(name = "danmu")
 public class Danmu{
 
-    @GeneratedValue
-    private int id;
 
-    private Date time;
     @Id //@id注意选择这个javax.persistence
     private String uuid;
+
+    private Date time;
+
     private String cid;
     private String gid;
     private String rid;
@@ -41,13 +41,6 @@ public class Danmu{
     private String ifs;
     private String cst;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getTime() {
         return time;

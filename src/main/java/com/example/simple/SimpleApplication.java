@@ -114,7 +114,7 @@ public class SimpleApplication extends SpringBootServletInitializer implements A
         // 参数：1、任务体 2、首次执行的延时时间
         //      3、任务执行间隔 4、间隔时间单位
 
-        danmuController.saveDanmu();
+//        danmuController.saveDanmu();
 
 //        service.scheduleAtFixedRate(()->{
 //            System.out.println("task ScheduledExecutorService "+new Date());

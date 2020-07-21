@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.simple.dao.RigonCityMapper">
+  <resultMap id="BaseResultMap" type="com.example.simple.entity.RigonCity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="parentId" jdbcType="VARCHAR" property="parentid" />
+    <result column="zh_name" jdbcType="VARCHAR" property="zhName" />
+    <result column="en_name" jdbcType="VARCHAR" property="enName" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sgon" jdbcType="VARCHAR" property="sgon" />
+    <result column="describes" jdbcType="VARCHAR" property="describes" />
+    <result column="status_en" jdbcType="VARCHAR" property="statusEn" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="detailImage" jdbcType="VARCHAR" property="detailimage" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+</mapper>
