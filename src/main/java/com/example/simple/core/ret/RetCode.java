@@ -9,6 +9,10 @@ public enum RetCode {
 
     // 失败
     FAIL(400),
+    // 失败
+
+    NOACC(400),
+
 
     // 未认证（签名错误）
     UNAUTHORIZED(401),

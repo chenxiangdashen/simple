@@ -5,6 +5,5 @@ import com.example.simple.entity.UserTb;
 
 public interface UserTbMapper extends Mapper<UserTb> {
     UserTb findByUsername(String username);
-
     UserTb findUserById(String id);
 }
