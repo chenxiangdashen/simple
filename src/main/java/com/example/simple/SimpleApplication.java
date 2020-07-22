@@ -22,35 +22,33 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+
 @MapperScan("com.example.simple.mapper")
-@Configuration
 @SpringBootApplication
-@Component
-@SpringBootConfiguration
-@EnableScheduling
-public class SimpleApplication extends SpringBootServletInitializer implements ApplicationRunner {
+public class SimpleApplication{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleApplication.class);
     //
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SimpleApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(SimpleApplication.class);
+//    }
 //
 //    public static void main(String[] args) {
 //        SpringApplication.run(SimpleApplication.class, args);
 //    }
 
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args){
         SpringApplication.run(SimpleApplication.class, args);
 
-
+//
 //        SpringApplication app = new SpringApplication(SimpleApplication.class);
 //        Environment env = app.run(args).getEnvironment();
 //        LOGGER.info("\n----------------------------------------------------------\n\t" +
@@ -71,16 +69,6 @@ public class SimpleApplication extends SpringBootServletInitializer implements A
 //        registry.addInterceptor(new WebAppConfig());
 //    }
 ////
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//
-//        registry.addMapping("/**")
-//                .allowCredentials(true)
-//                .allowedHeaders("*")
-//                .allowedOrigins("*")
-//                .allowedMethods("*");
-//
-//    }
 
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -102,15 +90,15 @@ public class SimpleApplication extends SpringBootServletInitializer implements A
         return new CorsFilter(source);
     }
 
-    @Autowired
-    DoubanMovieController doubanMovieController;
+//    @Autowired
+//    DoubanMovieController doubanMovieController;
+//
+//    @Autowired
+//    DanmuController danmuController;
 
-    @Autowired
-    DanmuController danmuController;
-
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+//    @Override
+//    public void run(ApplicationArguments args) throws Exception {
+//        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         // 参数：1、任务体 2、首次执行的延时时间
         //      3、任务执行间隔 4、间隔时间单位
 
@@ -122,5 +110,5 @@ public class SimpleApplication extends SpringBootServletInitializer implements A
 //        }, 0, 3, TimeUnit.DAYS);
 
 
-    }
+//    }
 }
