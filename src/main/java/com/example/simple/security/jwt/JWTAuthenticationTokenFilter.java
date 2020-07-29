@@ -41,6 +41,7 @@ public class JWTAuthenticationTokenFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 获取请求头中JWT的Token
         String tokenHeader = request.getHeader(JWTConfig.tokenHeader);
+
         if (null!=tokenHeader && tokenHeader.startsWith(JWTConfig.tokenPrefix)) {
             try {
                 // 截取JWT前缀

@@ -27,7 +27,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         Map<String,Object> resultData = new HashMap<>();
-        resultData.put("code","200");
+        resultData.put("code",200);
         resultData.put("msg", "登出成功");
         SecurityContextHolder.clearContext();
         ResultUtil.responseJson(response,ResultUtil.resultSuccess(resultData));

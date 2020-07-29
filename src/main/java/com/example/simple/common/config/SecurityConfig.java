@@ -68,12 +68,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 注入自定义PermissionEvaluator
      */
-    @Bean
-    public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler(){
-        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
-        handler.setPermissionEvaluator(new UserPermissionEvaluator());
-        return handler;
-    }
+//    @Bean
+//    public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler(){
+//        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
+//        handler.setPermissionEvaluator(new UserPermissionEvaluator());
+//        return handler;
+//    }
 
     /**
      * 配置登录验证逻辑
@@ -105,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login/userLogin")
                 // 配置登录成功自定义处理类
                 .successHandler(userLoginSuccessHandler)
-                // 配置登录失败自定义处理类
+        // 配置登录失败自定义处理类
                 .failureHandler(userLoginFailureHandler)
                 .and()
                 // 配置登出地址

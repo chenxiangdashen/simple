@@ -13,6 +13,7 @@ import java.util.Collection;
  * @Author Sans
  * @CreateTime 2019/10/1 20:23
  */
+
 @Data
 public class SelfUserEntity implements Serializable, UserDetails {
 
@@ -26,55 +27,6 @@ public class SelfUserEntity implements Serializable, UserDetails {
 	 * 用户名
 	 */
 	private String username;
-
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		isAccountNonExpired = accountNonExpired;
-	}
-
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		isAccountNonLocked = accountNonLocked;
-	}
-
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		isCredentialsNonExpired = credentialsNonExpired;
-	}
-
-	public void setEnabled(boolean enabled) {
-		isEnabled = enabled;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
 	/**
 	 * 密码
 	 */
@@ -111,16 +63,16 @@ public class SelfUserEntity implements Serializable, UserDetails {
 	public Collection<GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
-
-	@Override
-	public String getPassword() {
-		return null;
-	}
-
-	@Override
-	public String getUsername() {
-		return null;
-	}
+//
+//	@Override
+//	public String getPassword() {
+//		return null;
+//	}
+//
+//	@Override
+//	public String getUsername() {
+//		return null;
+//	}
 
 	@Override
 	public boolean isAccountNonExpired() {

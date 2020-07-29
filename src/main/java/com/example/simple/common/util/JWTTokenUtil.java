@@ -33,7 +33,7 @@ public class JWTTokenUtil {
         // 登陆成功生成JWT
         String token = Jwts.builder()
                 // 放入用户名和用户ID
-                .setId(selfUserEntity.getUsername()+"")
+                .setId(selfUserEntity.getUserId()+"")
                 // 主题
                 .setSubject(selfUserEntity.getUsername())
                 // 签发时间
